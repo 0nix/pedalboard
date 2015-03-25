@@ -1,29 +1,35 @@
 <html>
 	<head>
-		<title>This is the Pedal file</title>
-		<link rel="stylesheet" type="text/css" href="vendor/foundation/css/normalize.css">
+		<title>Pedalboard</title>
+		<meta charset='utf-8'>
+		<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="css/skeleton.css">
 		<link rel="stylesheet" type="text/css" href="css/joint.css">
-		<link rel="stylesheet" type="text/css" href="vendor/foundation/css/foundation.css">
+		<link rel="stylesheet" type="text/css" href="css/custom.css">
 	</head>
 	<body>
-		<div class="row">
-			<div class="columns small-2">
-				<ul class ="stack button-group">
-				<li><a href="#" class="button">Distortion</a></li>
-				<li><a href="#" class="button">Delay</a></li>
-				<li><a href="#" class="button">WahWah</a></li>
-				<li><a href="#" class="button">Flanger</a></li>
-				<li><a href="#" class="button">Phaser</a></li>
-				<li><a href="#" class="button">Reverb</a></li>
+		<div class="container">
+			<div class="row">
+				<div class="menu two columns">
+				<ul style="list-style-type: none;">
+					<li class="menu-item" id="Distortion"><button class="button-primary">Distortion</button></li>
+					<li class="menu-item" id="Delay"><button class="button-primary">Delay</button></li>
+					<li class="menu-item" id="Wahwah"><button class="button-primary">Wahwah</button></li>
+					<li class="menu-item" id="Flanger"><button class="button-primary">Flanger</<button type=""></button></li>
+					<li class="menu-item" id="Phaser"><button class="button-primary">Phaser</button></li>
+					<li class="menu-item" id="Reverb"><button class="button-primary">Reverb</button></li>
+					<li><button class="button-primary">N/A</button></li>
 				</ul>
-			</div>
-			<div id="canvas" class="columns small-10">
+				<p>Click on one of the available components</p>
+				</div>
+				<div id="canvas" class="unselected ten columns">
 				
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="vendor/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="vendor/lodash/lodash.min.js"></script>
-		<script type="text/javascript" src="vendor/foundation/js/foundation.min.js"></script>
 		<script type="text/javascript" src="vendor/backbone/backbone.js"></script>
 		<script type="text/javascript" src="vendor/geometry.min.js"></script>
 		<script type="text/javascript" src="vendor/vectorizer.min.js"></script>

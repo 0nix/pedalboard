@@ -1,0 +1,12 @@
+.menu{
+	margin-top: 0.5em;
+}
+#canvas{
+	margin-top: 0.5em;
+}
+#canvas.toSelect{
+	border: 2px solid red;
+}
+#canvas.unselected{
+	border: 2px solid black;
+}
