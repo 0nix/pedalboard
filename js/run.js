@@ -10,18 +10,36 @@ var run = function(){
 		height: 400,
 		gridSize: 1
 	});
-	/*var rectTemp = new joint.shapes.basic.Rect({
-		size: {width: 100, height: 30},
-		attrs: {
-			rect:{fill:"blue"},
-			text:{text:"hello", fill:"white"}
-		}
-	});*/
 	var temp = new joint.shapes.devs.Atomic({
-		size:{ width:80, height: 80},
+		size:{ width:200, height: 200},
 		inPorts:["In"],
-		outPorts:["Out"]
+		outPorts:["Out"],
+		attrs:{
+			image:{
+				"xlink:href": "../test.png",
+				width: 200,
+				height: 200
+			},
+			rect: { fill: 'none' }, 
+			text: { text: 'test', fill: 'black' }
+		}
 	});
+	var component = function(w, h, imageDir){
+		return new joint.shapes.devs.Atomic({
+			size:{ width: w || 200, height: h || 200},
+			inPorts:["In"],
+			outPorts:["Out"],
+			attrs:{
+				image:{
+					"xlink:href": imageDir || "../test.png",
+					width: w || 200,
+					height: h || 200
+				},
+				rect: { fill: 'none' }, 
+				text: { text: 'test', fill: 'black' }
+			}
+		});
+	}
 	var link = function(source, inport, dest, outport){
 		var link = new joint.shapes.devs.Link({
 			source: {id:source.id, selector: source.getPortSelector(inport)},
@@ -33,11 +51,8 @@ var run = function(){
 		$("#canvas").addClass("unselected");
 		$("#canvas").removeClass("toSelect");
 		if(elementPrimed){
-			var r = temp.clone();
+			var r = component();
 			r.position(x,y);
-			r.attr({
-				text: { text: toSet}
-			});
 			graph.addCells([r]);
 			elementPrimed = false;
 		}
