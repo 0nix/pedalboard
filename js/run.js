@@ -31,7 +31,8 @@ var run = function(){
 			outPorts:["L","R"],
 			attrs:{
 				image:{
-					"xlink:href": imageDir || "../gameboy.png",
+					//"xlink:href": imageDir || "../gameboy.png",
+					"xlink:href": imageDir || "http://placehold.it/100x168",
 					width: w || 100,
 					height: h || 168
 				},
