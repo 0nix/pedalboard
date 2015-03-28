@@ -50,9 +50,10 @@ joint.shapes.devs.Model = joint.shapes.basic.Generic.extend(_.extend({}, joint.s
             text: {
                 'pointer-events': 'none'
             },
+            //'.label': { text: 'Model', 'ref-x': .5, 'ref-y': 10, ref: '.body', 'text-anchor': 'middle', fill: '#000000' },
             '.label': { text: 'Model', 'ref-x': .5, 'ref-y': 10, ref: '.body', 'text-anchor': 'middle', fill: '#000000' },
-            '.inPorts .port-label': { x:-15, dy: 4, 'text-anchor': 'end', fill: '#000000' },
-            '.outPorts .port-label':{ x: 15, dy: 4, fill: '#000000' }
+            '.inPorts .port-label': { x:5, dy: -6, 'text-anchor': 'end', fill: '#000000' },
+            '.outPorts .port-label':{ x:-5, dy: -6, fill: 'white' }
         }
 
     }, joint.shapes.basic.Generic.prototype.defaults),
@@ -70,7 +71,8 @@ joint.shapes.devs.Model = joint.shapes.basic.Generic.extend(_.extend({}, joint.s
         attrs[portBodySelector] = { port: { id: portName || _.uniqueId(type) , type: type } };
         attrs[portSelector] = { ref: '.body', 'ref-y': (index + 0.5) * (1 / total) };
 
-        if (selector === '.outPorts') { attrs[portSelector]['ref-dx'] = 0; }
+        //if (selector === '.outPorts') { attrs[portSelector]['ref-dx'] = 0; }
+        if (selector === '.inPorts') { attrs[portSelector]['ref-dx'] = 0; }
 
         return attrs;
     }
@@ -85,7 +87,7 @@ joint.shapes.devs.Atomic = joint.shapes.devs.Model.extend({
         size: { width: 80, height: 80 },
         attrs: {
             '.body': { fill: 'salmon' },
-            '.label': { text: 'Atomic' },
+            '.label': { text: 'Atomic'},
             '.inPorts .port-body': { fill: 'PaleGreen' },
             '.outPorts .port-body': { fill: 'Tomato' }
         }
