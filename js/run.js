@@ -1,3 +1,14 @@
+var mat = function(){
+	 $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrain_width: true, // Does not change width of dropdown to that of the activator
+      hover: false, // Activate on click
+      alignment: 'right', // Aligns dropdown to left or right edge (works with constrain_width)
+      gutter: 0, // Spacing from edge
+      belowOrigin: false // Displays dropdown below the button
+    });
+}
 var run = function(){
 	var graph = new joint.dia.Graph;
 	var toSet;
@@ -7,22 +18,7 @@ var run = function(){
 	var paper = new joint.dia.Paper({
 		el: $("#canvas"),
 		model: graph,
-		height: 400,
 		gridSize: 1
-	});
-	var temp = new joint.shapes.devs.Atomic({
-		size:{ width:200, height: 200},
-		inPorts:["In"],
-		outPorts:["Out"],
-		attrs:{
-			image:{
-				"xlink:href": "../test.png",
-				width: 200,
-				height: 200
-			},
-			rect: { fill: 'none' }, 
-			text: { text: 'test', fill: 'black' }
-		}
 	});
 	var component = function(w, h, imageDir){
 		return new joint.shapes.devs.Atomic({
@@ -88,4 +84,5 @@ var run = function(){
 		toSet = ev.currentTarget.id;
 	});
 }
+mat();
 run();
