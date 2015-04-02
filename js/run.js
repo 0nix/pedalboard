@@ -80,6 +80,7 @@ var run = function(){
 	$(".menu-item").on("click",function(ev){
 		$("#canvas").addClass("toSelect");
 		$("#canvas").removeClass("unselected");
+		toast('Click on the workspace to add your element', 3500) 
 		elementPrimed = true;
 		toSet = ev.currentTarget.id;
 	});
