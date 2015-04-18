@@ -27,8 +27,8 @@ var run = function(){
 			outPorts:["L","R"],
 			attrs:{
 				image:{
-					//"xlink:href": imageDir || "../gameboy.png",
-					"xlink:href": imageDir || "http://placehold.it/100x168",
+					"xlink:href": imageDir || "../gameboy.png",
+					//"xlink:href": imageDir || "http://placehold.it/100x168",
 					width: w || 100,
 					height: h || 168
 				},
@@ -78,6 +78,7 @@ var run = function(){
 
 	});*/
 	$(".menu-item").on("click",function(ev){
+		ev.preventDefault();
 		$("#canvas").addClass("toSelect");
 		$("#canvas").removeClass("unselected");
 		toast('Click on the workspace to add your element', 3500) 
