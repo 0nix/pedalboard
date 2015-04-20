@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<nav>
-			<div class="nav-wrapper">
+			<div class="nav-wrapper orange lighten-1">
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 				<ul class="right">
 					<li><a href="/auth/logout"><i class="mdi-communication-vpn-key right"></i>Logout</a></li>
@@ -16,16 +16,43 @@
 			</div>
   		</nav>
 		<div class="container">
-			<div class="row">
-				<div class="s12 l8 offset-l2">
-					<h3><span></span>'s Boards</h3>
-					<a class="waves-effect waves-light btn"><i class="mdi-content-add-box right"></i>Add a Board</a>
-				</div>	
+			<div id="bone" class="row" style="padding-top: 0.5em;">
+				<div class="col s12 l8 offset-l2">
+					<a class="div-modal-activator waves-effect waves-light btn" href="#newboard">
+						<i class="mdi-content-add-box right"></i>Add a Board
+					</a>
+					<div id="newboard" style="display: none;">
+					<input placeholder="New Board Name" id="board_name" type="text" class="validate">
+			      	<textarea placeholder="Board Description" id="board_desc" class="materialize-textarea"></textarea>
+			      	<a href="#!" id="create-board" class="modal-close waves-effect waves-orange btn-flat ">Create</a>
+			       	<a href="#!" id="clear-board" class="modal-close waves-effect waves-red btn-flat ">Cancel</a>
+			       	</div>
+				</div>
+				<div class="col s12 l8 offset-l2">
+					<ul id="boardlist" class="collection">
+					</ul>
+				</div>
 			</div>
 		</div>
+		<script id="listTpl" type="text/template">
+			<% if(!data.hasData){ %>
+				<li class="collection-item">
+					<p>No data here</p>
+				</li>
+			<%} else {%>
+				<% _.each(data.list, function(b) { %>
+					<li class="collection-item">
+							<div>
+								<a href="/edit/<%=b.token%>"><%= b.name %></a>
+								<a href="<%=b.token%>" class="delete-board secondary-content"><i class="mdi-content-clear"></i></a>
+							</div>
+					</li>
+				<% }); %>
+			<% } %>
+		</script>
 		<script type="text/javascript" src="vendor/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="vendor/materialize/dist/js/materialize.js"></script>
-		<script type="text/javascript" src="vendor/lodash/lodash.min.js"></script>
+		<script type="text/javascript" src="http://underscorejs.org/underscore.js"></script>
 		<script type="text/javascript" src="vendor/backbone/backbone.js"></script>
 		<script type="text/javascript" src="js/dashboard.js"></script>
 	</body>

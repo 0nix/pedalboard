@@ -52,6 +52,10 @@ var run = function(){
 			r.position(x,y);
 			graph.addCells([r]);
 			elementPrimed = false;
+			var str = JSON.stringify(graph.toJSON());
+			var b64 = window.btoa(str);
+			console.log(b64);
+			console.log(window.atob(b64));
 		}
 	});
 	/*paper.on("cell:pointerclick",function(ev,x,y){
@@ -81,7 +85,7 @@ var run = function(){
 		ev.preventDefault();
 		$("#canvas").addClass("toSelect");
 		$("#canvas").removeClass("unselected");
-		toast('Click on the workspace to add your element', 3500) 
+		toast('Click on the workspace to add your element', 3500);
 		elementPrimed = true;
 		toSet = ev.currentTarget.id;
 	});
