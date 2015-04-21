@@ -1,0 +1,22 @@
+{
+  "name": "pedalboard",
+  "main": "server.js",
+  "dependencies": {
+    "express": "latest",
+    "mysql": "latest",
+    "request": "~2.53.0",
+    "body-parser":"latest",
+    "google-caja":"latest",
+    "morgan":"latest",
+    "passport":"latest",
+    "passport-google-oauth":"latest",
+    "express-session":"latest",
+    "randomstring":"latest",
+    "redis":"latest",
+    "cookie-parser":"latest",
+    "async":"latest"
+  },
+  "scripts": {
+    "start": "node ./server.js"
+  }
+}
