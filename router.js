@@ -18,15 +18,61 @@ module.exports = function(app, pass, redis){
 		//if(req.isAuthenticated) res.redirect("/editor");
 		res.sendFile('landing.html', { root: __dirname + "/static" });
 	});
-	app.get("/editor", isLoggedIn, function(req,res){
-		res.sendFile("editor.html",  { root: __dirname + "/static" });
-	});
 	app.get("/dash",isLoggedIn, function(req, res){
 		res.sendFile("dash.html",  { root: __dirname + "/static" });
 	});
-	/*app.post("/edit/:id",isLoggedIn, function(req,res){
-		
-	});*/
+	app.get("/editor/:id", isLoggedIn, function(req,res){
+		res.sendFile("editor.html",  { root: __dirname + "/static" });
+	});
+	app.get("/editor/api/:id",isLoggedIn, function(req,res){
+		if(req.params.id.match(/^[a-zA-Z0-9]*$/) && req.body){
+			var pkg = {serial:"",links:""}
+			var ID  = req.session.passport.user.id;
+			var db = sql.createConnection(login);
+			var qa = "SELECT * FROM board WHERE uid = '" + ID +"' AND token = '" + req.params.id + "' ;";
+			db.query(qa, function(err,data){
+				if(err) throw err;
+				if(data[0] != null){
+					redis.hgetall(req.params.id, function (err, pedal){
+    					pkg.serial = pedal.view;
+    					pkg.links = pedal.links;
+    					res.send(pkg);
+					});
+				}
+				else {
+					db.end();
+					res.send(503,"NOT PERMITTED");
+				}
+			});
+		}
+		else { res.send(503, "BAD REQUEST")}
+	});
+	app.put("/editor/api/:id", isLoggedIn, function(req,res){
+		if(req.params.id.match(/^[a-zA-Z0-9]*$/) && req.body){
+			var ID  = req.session.passport.user.id;
+			var db = sql.createConnection(login);
+			var qa = "SELECT * FROM board WHERE uid = '" + ID +"' AND token = '" + req.params.id + "' ;";
+			db.query(qa, function(err,data){
+				if(err) throw err;
+				if(data[0] != null){
+					db.end();
+					redis.hset(	req.params.id,
+								"view",
+								req.body.serial,redis.print);
+					redis.hset(	req.params.id,
+								"links",
+								req.body.links,redis.print);
+					res.send(200,"DONE");
+
+				}
+				else {
+					db.end();
+					res.send(503,"NOT PERMITTED");
+				}
+			});
+		}
+		else { res.send(503, "BAD REQUEST")}
+	});
 	app.get("/auth", pass.authenticate("google",{
 		scope: ["profile","email"]
 	}));
@@ -72,7 +118,7 @@ module.exports = function(app, pass, redis){
 		if(req.params.id.match(/^[a-zA-Z0-9]*$/)){
 			var ID  = req.session.passport.user.id;
 			var db = sql.createConnection(login);
-			var qa = "SELECT * FROM board WHERE uid = '" + ID +"' AND token = '" + req.params.id + "' ;"
+			var qa = "SELECT * FROM board WHERE uid = '" + ID +"' AND token = '" + req.params.id + "' ;";
 			db.query(qa, function(err,data){
 				if(err) throw err;
 				if(data[0] != null){
