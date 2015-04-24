@@ -5,15 +5,14 @@ var model = function(){
 			return {
 				serializedView:"",
 				linkedList: [],
-				relayAddress: ""
+				relayAddress: "",
+				prevExist: false
 			}
-		},
-		pollServer:function(){
-
 		},
 		relayServer:function(){
 			var pkg = {
-				serial: this.get("serializedView")
+				serial: this.get("serializedView"),
+				list: "0"
 			}
 			var add = this.get("relayAddress");
 			$.ajax({
@@ -40,7 +39,6 @@ var model = function(){
 			this.listeners();
 			bone.BoneModel.set("relayAddress", 
 				"./api/" + window.location.pathname.split("/editor/")[1]);
-			//this.listenTo(app.AppModel,"serializedView")
 		},
 		listeners:function(){
 			 $('.dropdown-button').dropdown({
@@ -55,6 +53,8 @@ var model = function(){
 		}
 	});
 	bone.BoneView = new bone.View;
+	return true;
+	//resolve(true);
 }
 var view = function(){
 	var graph = new joint.dia.Graph;
@@ -67,6 +67,9 @@ var view = function(){
 		model: graph,
 		gridSize: 1
 	});
+	if(bone.BoneModel.get("prevExist")){
+		graph.fromJSON(bone.BoneModel.deserializeView());
+	}
 	var component = function(w, h, imageDir){
 		return new joint.shapes.devs.Atomic({
 			size:{ width: w || 100, height: h || 168},
@@ -134,5 +137,20 @@ var view = function(){
 		toSet = ev.currentTarget.id;
 	});
 }
-model();
-view();
+var promise = new Promise(function(resolve, reject) {
+    model();
+    var add = bone.BoneModel.get("relayAddress");
+	$.ajax({
+		method: "GET",
+		url: add
+	}).then(function(data,status,xhr){
+	if(typeof data.serial === "string" && data.serial != "0" && data.serial != ""){
+			bone.BoneModel.set("prevExist",true);
+			bone.BoneModel.set("serializedView",data.serial);
+		}
+		resolve(true);
+	});
+});
+promise.then(function(result) {
+	view();
+});
