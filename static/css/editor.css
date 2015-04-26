@@ -1,0 +1,35 @@
+html {
+  font-family: "Lato", sans-serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+.menu{
+	margin-top: 0.5em;
+}
+#canvas{
+	margin-top: 0.5em;
+   width:100%;
+   height: 80%;
+}
+#canvas svg{
+   width: 100%;
+   height: 100%;
+}
+#canvas.toSelect{
+	border: 2px solid red;
+}
+#canvas.unselected{
+	border: 2px solid black;
+}
+.link .connection {
+    stroke: orange;
+    stroke-width: 4px;
+}
+
+.link .marker-arrowhead, .link .marker-vertex {
+    fill: #696b87;
+}
+
+.link-tools .tool-remove circle {
+    fill: #ff7e5d;
+}
