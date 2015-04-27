@@ -2062,6 +2062,12 @@ dat.GUI = dat.gui.GUI = (function (css, saveDialogueContents, styleSheet, contro
          * name
          * @instance
          */
+        removeFolder: function(name) {
+            this.__folders[name].close();
+            this.__folders[name].domElement.parentNode.parentNode.removeChild(this.__folders[name].domElement.parentNode);
+            this.__folders[name] = undefined;
+            this.onResize();
+        },
         addFolder: function(name) {
 
           // We have to prevent collisions on names in order to have a key
@@ -2096,7 +2102,9 @@ dat.GUI = dat.gui.GUI = (function (css, saveDialogueContents, styleSheet, contro
           this.__folders[name] = gui;
 
           var li = addRow(this, gui.domElement);
-          dom.addClass(li, 'folder');
+          if(name == "Add a Pedal") dom.addClass(li, "folder mainmenu");
+          else if(name.match(/^pedal/)) dom.addClass(li, "folder pedalmenu");
+          else dom.addClass(li, 'folder');
           return gui;
 
         },
