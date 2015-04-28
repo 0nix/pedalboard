@@ -2,6 +2,8 @@ var bone = {};
 var viewK = {
 	guiTool:{}
 };
+var pedalTypeId = 6;
+var select = 'Distortion';
 var model = function(){
 	bone.Model = Backbone.Model.extend({
 		defaults: function(){
@@ -143,23 +145,258 @@ var model = function(){
 				}
 			}.bind(this));
 		},
+		//change this!
 		pedalAdd: function(){
-			var r = viewK.component(130, 233, "./yellowbg.png");
-			var k1 = viewK.knob(), k2 = viewK.knob();
+
+		//remove this value one we can pass values                
+		
+
+	        switch ( viewK.guiTool.pedal ) {
+		//DISTORTION
+                      case "Distortion":
+			var r = viewK.component(130, 233, "./distortion430770.png");
+			var k1 = viewK.knob(), k2 = viewK.knob(), k3 = viewK.knob();
 			r.prop("comp","pedal");
-			r.prop("name",viewK.guiTool.pedal);
+			r.prop("name","DISTORTION");
 			r.position(10,10);
 			k1.position(20,20);
 			k1.rotate(-90, true);
 			k2.position(85,20);
 			k2.rotate(-90, true);
+			k3.position(52,60);
+			k3.rotate(-90, true);
 			r.embed(k1);
 			r.embed(k2);
-			/*r.on("change:position",function(){
-				bone.BoneModel.serializeView(viewK.graph.toJSON());	
-			});*/
-			viewK.graph.addCells([r, k1, k2]);
+			r.embed(k3);
+			viewK.graph.addCells([r, k1, k2, k3]);
 			bone.BoneModel.serializeView(viewK.graph.toJSON());
+                       break;
+		//OMEGAMETAL
+                      case "OMEGAMETAL":
+			var r = viewK.component(130, 233, "./om430770.png");
+			var k1 = viewK.knob(), k2 = viewK.knob(), k3 = viewK.knob();
+			r.prop("comp","pedal");
+			r.prop("name","OMEGAMETAL");
+			r.position(10,10);
+			k1.position(20,20);
+			k1.rotate(-90, true);
+			k2.position(85,20);
+			k2.rotate(-90, true);
+			k3.position(52,60);
+			k3.rotate(-90, true);
+			r.embed(k1);
+			r.embed(k2);
+			r.embed(k3);
+			viewK.graph.addCells([r, k1, k2, k3]);
+			bone.BoneModel.serializeView(viewK.graph.toJSON());
+                       break;		
+		//BOOST	
+                      case "Boost":
+                        var r = viewK.component(260, 130, "./boost600300.png");
+			var k1 = viewK.knob();
+			r.prop("comp","pedal");
+			r.prop("name","Hyper Boost");
+			r.position(10,10);
+			k1.position(50,60);
+			k1.rotate(-90, true);
+			r.embed(k1);
+			viewK.graph.addCells([r, k1]);
+			bone.BoneModel.serializeView(viewK.graph.toJSON());
+                        break;	
+		
+		//flange
+		      case "Flange":
+			var r = viewK.component(130, 233, "./flange430770.png");
+			var k1 = viewK.knob(), k2 = viewK.knob(), k3 = viewK.knob();
+			r.prop("comp","pedal");
+			r.prop("name","Black Witch Flange");
+			r.position(10,10);
+			k1.position(20,20);
+			k1.rotate(-90, true);
+			k2.position(20,65);
+			k2.rotate(-90, true);
+			k3.position(20,110);
+			k3.rotate(-90, true);
+			r.embed(k1);
+			r.embed(k2);
+			r.embed(k3);
+			viewK.graph.addCells([r, k1, k2, k3]);
+			bone.BoneModel.serializeView(viewK.graph.toJSON());
+                        break;
+		//HyperDelay
+		      case "HyperDelay":
+                        var r = viewK.component(233, 233, "./hd770770.png");
+			var k1 = viewK.knob(), k2 = viewK.knob(), k3 = viewK.knob(), k4 = viewK.knob();
+                        var k5 = viewK.knob(), k6 = viewK.knob(), k7 = viewK.knob(), k8 = viewK.knob();
+			r.prop("comp","pedal");
+			r.prop("name","Hyper Delay");
+			r.position(10,10);
+			k1.position(20,20);
+			k1.rotate(-90, true);
+			k2.position(70,20);
+			k2.rotate(-90, true);
+			k3.position(120,20);
+			k3.rotate(-90, true);
+			k4.position(170,20);
+			k4.rotate(-90, true);
+
+			k5.position(20,65);
+			k5.rotate(-90, true);
+			k6.position(70,65);
+			k6.rotate(-90, true);
+                        k7.position(120,65);
+			k7.rotate(-90, true);
+			k8.position(170,65);
+			k8.rotate(-90, true);
+			r.embed(k1);
+			r.embed(k2);
+			r.embed(k3);
+                        r.embed(k4);
+                        r.embed(k5);
+			r.embed(k6);
+			r.embed(k7);
+			r.embed(k8);
+			viewK.graph.addCells([r, k1, k2, k3, k4, k5, k6, k7, k8]);
+			bone.BoneModel.serializeView(viewK.graph.toJSON());
+                        break;
+		//BurritoReverb
+		      case "BurritoReberb":
+                        var r = viewK.component(233, 233, "./br770770.png");
+			var k1 = viewK.knob(), k2 = viewK.knob(), k3 = viewK.knob(), k4 = viewK.knob();
+			r.prop("comp","pedal");
+			r.prop("name","BurritoReberb");
+			r.position(10,10);
+			k1.position(20,20);
+			k1.rotate(-90, true);
+			k2.position(70,20);
+			k2.rotate(-90, true);
+			k3.position(120,20);
+			k3.rotate(-90, true);
+			k4.position(170,20);
+			k4.rotate(-90, true);
+
+			r.embed(k1);
+			r.embed(k2);
+			r.embed(k3);
+                        r.embed(k4);
+
+			viewK.graph.addCells([r, k1, k2, k3, k4]);
+			bone.BoneModel.serializeView(viewK.graph.toJSON());
+                        break;
+		//NOISE
+		      case "NOISE":
+                        var r = viewK.component(233, 233, "./noise770770.png");
+			var k1 = viewK.knob(), k2 = viewK.knob(), k3 = viewK.knob(), k4 = viewK.knob();
+                        var k5 = viewK.knob(), k6 = viewK.knob(), k7 = viewK.knob(), k8 = viewK.knob();
+			var k9 = viewK.knob(), k10= viewK.knob(), k11= viewK.knob(), k12= viewK.knob();
+			r.prop("comp","pedal");
+			r.prop("name","Hyper Delay");
+			r.position(10,10);
+
+			k1.position(20,20);
+			k1.rotate(-90, true);
+			k2.position(70,20);
+			k2.rotate(-90, true);
+			k3.position(120,20);
+			k3.rotate(-90, true);
+			k4.position(170,20);
+			k4.rotate(-90, true);
+
+			k5.position(20,65);
+			k5.rotate(-90, true);
+			k6.position(70,65);
+			k6.rotate(-90, true);
+                        k7.position(120,65);
+			k7.rotate(-90, true);
+			k8.position(170,65);
+			k8.rotate(-90, true);
+
+			k9.position(20,110);
+			k9.rotate(-90, true);
+			k10.position(70,110);
+			k10.rotate(-90, true);
+                        k11.position(120,110);
+			k11.rotate(-90, true);
+			k12.position(170,110);
+			k12.rotate(-90, true);
+			r.embed(k1);
+			r.embed(k2);
+			r.embed(k3);
+                        r.embed(k4);
+                        r.embed(k5);
+			r.embed(k6);
+			r.embed(k7);
+			r.embed(k8);
+ 			r.embed(k9);
+			r.embed(k10);
+			r.embed(k11);
+			r.embed(k12);
+			viewK.graph.addCells([r, k1, k2, k3, k4, k5, k6, k7, k8,k9,k10,k11,k12]);
+			bone.BoneModel.serializeView(viewK.graph.toJSON());
+                        break;
+                //STUTTER
+	       	      case "Stutter":
+                        var r = viewK.component(260, 130, "./stutter600300.png");
+			var k1 = viewK.knob();
+			r.prop("comp","pedal");
+			r.prop("name","Sketchy Stutter");
+			r.position(10,10);
+			k1.position(20,20);
+			k1.rotate(-90, true);
+			r.embed(k1);
+			viewK.graph.addCells([r, k1]);
+			bone.BoneModel.serializeView(viewK.graph.toJSON());
+                        break;	
+		
+                //TIMEDELONGE
+		      case "timeDelonge":
+			var r = viewK.component(130, 233, "./timedelonge430770.png");
+			var k1 = viewK.knob(), k2 = viewK.knob(), k3 = viewK.knob(), k4 = viewK.knob();
+			r.prop("comp","pedal");
+			//r.prop("name",viewK.guiTool.pedal);
+			r.prop("name","Time DeLonge");
+			r.position(10,10);
+			k1.position(20,20);
+			k1.rotate(-90, true);
+			k2.position(85,20);
+			k2.rotate(-90, true);
+			k3.position(20,65);
+			k3.rotate(-90, true);
+                        k4.position(85,65);
+			k4.rotate(-90, true);
+			r.embed(k1);
+			r.embed(k2);
+			r.embed(k3);
+                        r.embed(k4);
+			viewK.graph.addCells([r, k1, k2, k3,k4]);
+			bone.BoneModel.serializeView(viewK.graph.toJSON());
+		      break;
+		//SludgeMaster
+                      case "SludgeMaster":
+                        var r = viewK.component(260, 130, "./sm600300.png");
+			var k1 = viewK.knob(), k2 = viewK.knob(), k3 = viewK.knob(), k4 = viewK.knob(),k5 = viewK.knob();
+			r.prop("comp","pedal");
+			r.prop("name","Time DeLonge");
+			r.position(10,10);
+			k1.position(20,20);
+			k1.rotate(-90, true);
+			k2.position(65,20);
+			k2.rotate(-90, true);
+			k3.position(110,20);
+			k3.rotate(-90, true);
+                        k4.position(155,20);
+			k4.rotate(-90, true);
+			k5.position(200,20);
+			k5.rotate(-90, true);
+			r.embed(k1);
+			r.embed(k2);
+			r.embed(k3);
+                        r.embed(k4);
+			r.embed(k5);
+			viewK.graph.addCells([r, k1, k2, k3,k4,k5]);
+			bone.BoneModel.serializeView(viewK.graph.toJSON());
+                        break;		
+                }       
 		},
 		pedalUpdate: function(len){
 			for(var i = 0; i < len; i++){
@@ -201,7 +438,12 @@ var model = function(){
 		generalGUI: function(){
 			viewK.guiTool = bone.BoneModel.genDatObj();
 			viewK.f1 = viewK.gui.addFolder('Add a Pedal');
-			viewK.f1.add(viewK.guiTool, 'pedal', [ "Choose", 'Distorsion', 'Delay', 'Flanger' ] );
+           	viewK.f1.add(viewK.guiTool, 'pedal', [ "Choose", 'Distortion', 'Boost', 'Flange' , 'HyperDelay' , 'Stutter' , 'SludgeMaster' , 'timeDelonge','NOISE','OMEGAMETAL','BurritoReberb' ] );
+			
+			select = viewK.guiTool.pedal;
+
+	//		viewK.f1.add(viewK.guiTool, 'pedal', [ "Choose", 'Distorsion', 'Delay', 'Flanger' ] );
+
 			viewK.f1.add(viewK.guiTool, 'pedalAdd' );
 			viewK.f1.open();
 		},
