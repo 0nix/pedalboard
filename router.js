@@ -9,7 +9,7 @@ var san = require("google-caja").sanitize;
 var login = {
 	host: "localhost",
 	user: "root",
-	password:"Newtonf=gm1m2/r2",
+	password:"HAHAthisisnotthepasswordsucker",
 	database : 'pedal'
 };
 //var db = sql.createConnection(login);
